@@ -1,9 +1,12 @@
 package red.biopersona.persistenceservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +17,8 @@ import red.biopersona.persistenceservice.model.EntityClientes;
 import red.biopersona.persistenceservice.service.ClientesService;
 
 @RestController
-@RequestMapping("/clientes")
-public class PersistenceController {
+@RequestMapping("/persistence")
+public class ClientController{
 	
 	@Autowired
 	ClientesService clientesService;
@@ -25,6 +28,13 @@ public class PersistenceController {
 		HttpStatus code = HttpStatus.OK;
 		String resul=clientesService.registraCliente(cliente);
 		return new ResponseEntity<>(resul, code);
+	}
+	
+	@GetMapping(value = "/getClientesDisponibles", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getClientesDisponibles()  {
+		HttpStatus code = HttpStatus.OK;
+		List<EntityClientes> datos=clientesService.getClientesDisponibles();
+		return new ResponseEntity<>(datos, code);
 	}
 	
 	@PostMapping(value = "/existeCliente", produces = MediaType.APPLICATION_JSON_VALUE)

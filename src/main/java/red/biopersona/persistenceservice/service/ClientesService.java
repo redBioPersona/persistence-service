@@ -16,14 +16,6 @@ public class ClientesService implements IClientesService {
 	private IClientesRepository clientesRepository;
 
 
-//	public boolean puedeConsumir(String cliente, String servicio) throws CollectionsServiceException {
-//		boolean result = false;
-//		if (cliente.equalsIgnoreCase("omar")) {
-//			throw new CollectionsServiceException(ErrorEnum.EXC_ERROR_PARAMS);
-//		}
-//		return result;
-//	}
-
 	public boolean existeCliente(String cliente) {
 		boolean result = false;
 		List<EntityClientes> datosClientes = clientesRepository.findClienteByLlave(cliente);
@@ -33,6 +25,10 @@ public class ClientesService implements IClientesService {
 			result = true;
 		}
 		return result;
+	}
+	
+	public List<EntityClientes> getClientesDisponibles() {
+		return clientesRepository.findClientesDisponibles();
 	}
 
 	public String registraCliente(EntityClientes cliente) {

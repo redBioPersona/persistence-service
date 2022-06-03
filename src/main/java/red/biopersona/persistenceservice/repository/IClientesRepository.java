@@ -11,4 +11,7 @@ public interface IClientesRepository extends MongoRepository<EntityClientes, Str
 	
 	@Query("{ 'llave' : ?0 }")
 	List<EntityClientes> findClienteByLlave(String llave);
+	
+	@Query("{'active':true}")
+	List<EntityClientes> findClientesDisponibles();
 }
