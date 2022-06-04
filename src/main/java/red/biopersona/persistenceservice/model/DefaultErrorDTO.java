@@ -6,7 +6,7 @@ import red.biopersona.persistenceservice.util.ErrorEnum;
 
 
 /**
- * @author MINSAIT
+ * @author omar
  * La clase ErrorBean, usada para indicar los errores que sucedieron durante la ejecucion.
  */
 public class DefaultErrorDTO implements Serializable {

@@ -3,7 +3,7 @@ package red.biopersona.persistenceservice.enumeration;
 /***
  * Enum con los tipos de error del lado de servidor
  * 
- * @author indra
+ * @author omar
  *
  */
 public enum ErrorServerEnum {

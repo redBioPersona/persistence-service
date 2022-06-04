@@ -3,7 +3,6 @@ package red.biopersona.persistenceservice.enumeration;
 /***
  * Enum con los tipos de error en el formulario de login
  * 
- * @author indra
  *
  */
 public enum ErrorLoginEnum {

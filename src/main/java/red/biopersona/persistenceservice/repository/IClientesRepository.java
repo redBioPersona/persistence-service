@@ -7,6 +7,11 @@ import org.springframework.data.mongodb.repository.Query;
 
 import red.biopersona.persistenceservice.model.EntityClientes;
 
+/**
+ * Repository con los datos en MongoDB
+ * @author Omar Barrera Valentin
+ *
+ */
 public interface IClientesRepository extends MongoRepository<EntityClientes, String> {
 	
 	@Query("{ 'llave' : ?0 }")

@@ -3,7 +3,7 @@ package red.biopersona.persistenceservice.enumeration;
 /***
  * Enum con los tipos de error en el reeenvio de codigo
  * 
- * @author indra
+ * @author omar
  *
  */
 public enum ErrorResendCodeEnum {

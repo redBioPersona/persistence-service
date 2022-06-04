@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * @author MINSAIT
+ * @author omar
  * La clase DefaultErrorResponseBean, 
  * usada para enviar la respuesta en caso de error durante la ejecucion del servicio.
  */
