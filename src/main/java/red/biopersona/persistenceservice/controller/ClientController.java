@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
 import red.biopersona.persistenceservice.model.EntityClientes;
 import red.biopersona.persistenceservice.service.ClientesService;
 import red.biopersona.persistenceservice.service.MongoService;
@@ -25,6 +26,7 @@ import red.biopersona.persistenceservice.service.MongoService;
  * @author Omar Barrera Valentin
  *
  */
+@Slf4j
 public class ClientController{
 	
 	@Autowired
@@ -48,9 +50,10 @@ public class ClientController{
 	}
 	
 	@PostMapping(value = "/existeCliente", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> existeCliente(@RequestParam String cliente)  {
+	public ResponseEntity<?> existeCliente(@RequestParam String client)  {
 		HttpStatus code = HttpStatus.OK;
-		boolean resul=clientesService.existeCliente(cliente);
+		boolean resul=mongoS.canOperateTheClient(client);
+		log.info("validando si existe el cliente "+client+"?="+resul);
 		return new ResponseEntity<>(resul, code);
 	}
 }

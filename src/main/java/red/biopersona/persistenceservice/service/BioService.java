@@ -20,7 +20,7 @@ public class BioService implements IBioService{
 	public String enrollFace(RequestEnrollFaceDTO request) throws CollectionsServiceException {
 		String resp=null;
 		boolean puedeOperar=mongoS.canOperateTheClient(request.getClient());
-		log.info("El cliente, puede operar?="+puedeOperar);
+		log.info("El cliente:"+request.getClient()+" puede operar?="+puedeOperar);
 		if(puedeOperar) {
 			try {
 				ObjectId template=mongoS.saveTemplate(request.getBiometricPerson(),request.getFile().getBytes(), request.getClient());
