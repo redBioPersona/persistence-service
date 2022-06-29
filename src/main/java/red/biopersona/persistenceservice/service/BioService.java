@@ -35,4 +35,8 @@ public class BioService implements IBioService{
 		return resp;
 		
 	}
+	
+	public boolean deleteSample(String client,String sample) throws CollectionsServiceException {
+		return mongoS.RemoveFile(client, sample);		
+	}
 }

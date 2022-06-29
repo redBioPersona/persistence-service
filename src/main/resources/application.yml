@@ -4,7 +4,7 @@ spring:
     data:
       mongodb:
         database: clients
-        host: localhost
+        host: 192.168.1.69
         port: 27017
     servlet:
         session.timeout: 300s
