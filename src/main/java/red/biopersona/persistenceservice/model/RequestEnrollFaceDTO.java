@@ -16,16 +16,21 @@ import lombok.Setter;
  * @author Omar Barrera Valentin
  *
  */
-public class RequestEnrollFaceDTO  implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	@NotNull
-	private String client;
-	@NotNull
-	private String biometricPerson;
-	@NotNull
-	private String segmentation;
-	@NotNull
-	private MultipartFile file;
+public class RequestEnrollFaceDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @NotNull(message = "key not null")
+    private String key;
+
+    @NotNull(message = "biometricPerson not null")
+    private String biometricPerson;
+    
+    @NotNull(message = "type not null")
+    private String type;
+
+    private String segmentation;
+
+    @NotNull(message = "file not null")
+    private MultipartFile file;
 
 }

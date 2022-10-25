@@ -43,7 +43,8 @@ public class MongoService {
 	MongoCollection<Document> clientsAllowedGlobal = null;
 
 	// Constructor de la clase
-	public MongoService(@Value("${spring.data.mongodb.database:clients}") String database,
+	public MongoService(
+	        @Value("${spring.data.mongodb.database:clients}") String database,
 			@Value("${spring.data.mongodb.host:localhost}") String host,
 			@Value("${spring.data.mongodb.port:27017}") int port) {
 		ConnectionString connectionString = new ConnectionString("mongodb://" + host + ":" + port + "/" + database);
@@ -61,7 +62,9 @@ public class MongoService {
 	 */
 	public boolean canOperateTheClient(String Client) {
 		boolean resultado = false;
-		Bson filtro = Filters.and(Filters.eq("llave", Client), Filters.eq("active", true),
+		Bson filtro = Filters.and(
+		        Filters.eq("key", Client),
+		        Filters.eq("active", true),
 				Filters.or(Filters.exists("maxDateUso", false), Filters.gte("maxDateUso", new Date()))
 
 		);
@@ -215,6 +218,7 @@ public class MongoService {
 
 		MongoCollection<Document> data_files = _database.getCollection("data.files");
 		MongoCollection<Document> data_chunks = _database.getCollection("data.chunks");
+        MongoCollection<Document> relationShip = _database.getCollection("relationships");
 
 		Bson FiltroDataFile = Filters.eq("_id", new ObjectId(_id));
 		Bson FiltroDataChunks = Filters.eq("files_id", new ObjectId(_id));
@@ -228,6 +232,12 @@ public class MongoService {
 			data_chunks.deleteMany(new Document("files_id", new ObjectId(_id)));
 			result = true;
 		}
+		
+		if(result) {
+		    relationShip.deleteMany(new Document("template",_id));
+	        relationShip.deleteMany(new Document("IdBiometricPerson",_id));
+		}
+		
 		return result;
 	}
 

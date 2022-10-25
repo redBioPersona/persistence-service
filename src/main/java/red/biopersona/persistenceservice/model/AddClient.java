@@ -12,11 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 @Document(collection = "companies")
-public class EntityClientes implements Serializable {
+public class AddClient implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +23,8 @@ public class EntityClientes implements Serializable {
 	private String _id=new ObjectId().toString();
 	
 	@Field
-	private String llave=new ObjectId().toString();
+	@NotNull(message = "key must not null")
+	private String key=new ObjectId().toString();
 	
 	@NotNull(message = "Cliente name not null")
 	private String companyName;
@@ -33,8 +33,13 @@ public class EntityClientes implements Serializable {
 	private Object logo;
 	
 	//Datos del contacto, con el cliente
+	@NotNull(message = "Client name cannot be null")
 	private String contactoNombre;
+	
+	@NotNull(message = "Client mail cannot be null")
 	private String contactoEmail;
+	
+	@NotNull(message = "Client number cannot be null")
 	private String contactoNumero;
 	
 	//Información sobre los usos permitidos (operaciones)
@@ -52,11 +57,10 @@ public class EntityClientes implements Serializable {
 	private Date maxDateUso;
 	
 	//Información sobre creación/actualización
-	private String createdBy;
-	private String updatedBy;
+	@NotNull(message = "createdBy not null")
+	protected String createdBy;
+	
 	@Field
     private Date createdAt=new Date();
-    @Field
-    private Date updatedAt=new Date();
 
 }

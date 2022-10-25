@@ -17,15 +17,15 @@ public class BioService implements IBioService{
 	@Autowired
 	MongoService mongoS;
 	
-	public String enrollFace(RequestEnrollFaceDTO request) throws CollectionsServiceException {
+	public String enroll(RequestEnrollFaceDTO request) throws CollectionsServiceException {
 		String resp=null;
-		boolean puedeOperar=mongoS.canOperateTheClient(request.getClient());
-		log.info("El cliente:"+request.getClient()+" puede operar?="+puedeOperar);
+		boolean puedeOperar=mongoS.canOperateTheClient(request.getKey());
+		log.info("El cliente:"+request.getKey()+" puede operar?="+puedeOperar);
 		if(puedeOperar) {
 			try {
-				ObjectId template=mongoS.saveTemplate(request.getBiometricPerson(),request.getFile().getBytes(), request.getClient());
+				ObjectId template=mongoS.saveTemplate(request.getBiometricPerson(),request.getFile().getBytes(), request.getKey());
 				resp=template.toString();
-				mongoS.SaveRelationShips(request.getClient(), template, null, null, null, request.getBiometricPerson(), "Facial", request.getSegmentation());
+				mongoS.SaveRelationShips(request.getKey(), template, null, null, null, request.getBiometricPerson(), request.getType(), request.getSegmentation());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}		
